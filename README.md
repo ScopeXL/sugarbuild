@@ -9,11 +9,7 @@ modular, allowing you to control the entire installation process on what you wan
 ```
 sugarbuild --runComposer=true --buildSugar=true --buildSidecar=true --installSugar=true --installDemoData=false
 ```
-Check out the **Parameters** section for a list of all the configurable options. All parameters can be set from the command line and/or the `config.json` file.
-
-## Motivation
-
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+Check out the (Paramters)[https://github.com/ScopeXL/sugarbuild#parameters] section for a list of all the configurable options. All parameters can be set from the command line and/or the `config.json` file.
 
 ## Installation
 
