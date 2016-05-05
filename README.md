@@ -34,6 +34,7 @@ Clone the repo and install the application
 git clone https://github.com/ScopeXL/sugarbuild.git
 cd sugarbuild
 npm install
+npm link
 ```
 Run the application with:
 ```
