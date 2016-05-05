@@ -66,6 +66,7 @@ All parameters are **optional**. You may also set them in the `config.json` file
 | --enableBuildSchedule | false | Uses `git` to switch to each branch in the `"branches": []` array in the `config.json` file. It will then build each branch of sugar. Right now it will build each instance every 3 hours. This is best used when coupled with `createSqlDump` to provide multiple up-to-date SQL dumps for future builds |
 | --enableWebServer | false | Starts a web server to allow others to `importDumpFile` from your SQL dump collection |
 | --webServerPort | 3000 | The port that the web server listens on |
+| --verbose | false | Show all background commands and output in the console. Use this for debugging purposes if the build process isn't working as intended |
 
 
 ## Contributors
