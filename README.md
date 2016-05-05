@@ -22,19 +22,19 @@ This project is built using a number of tools. Here are the pre-requisites you s
 Everything else is maintained by the npm install process.
 Install the application:
 
-Rename `config.sample.json` to `config.json`
-Edit the `config.json` file to fit your installation needs. Don't forget to insert your SugarCRM license key:
-```
-{
-  "sugarcrmLicense": "{YOUR_LICENSE_KEY}",
-}
-```
 Clone the repo and install the application
 ```
 git clone https://github.com/ScopeXL/sugarbuild.git
 cd sugarbuild
 npm install
 npm link
+```
+Rename `config.sample.json` to `config.json`
+Edit the `config.json` file to fit your installation needs. Don't forget to insert your SugarCRM license key:
+```
+{
+  "sugarcrmLicense": "{YOUR_LICENSE_KEY}",
+}
 ```
 Run the application with:
 ```
