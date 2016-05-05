@@ -1,0 +1,55 @@
+body {
+    font-family: 'Helvetica', sans-serif;
+}
+
+#files {
+    display: inline-block;
+    margin: 30px;
+    padding: 15px;
+    width: 450px;
+    background: #f7f7f7;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#available {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+}
+
+#no-files {
+    color: #777;
+}
+
+.file {
+    margin-bottom: 5px;
+}
+
+.modified {
+    float: right;
+    color: #777;
+}
+
+a, a:link, a:visited, a:active {
+    color: #4078c0;
+    text-decoration: none;
+}
+
+#exports {
+    width: 100%;
+}
+#exports td {
+    padding: 5px;
+}
+
+#github {
+    text-align: right;
+    margin-top: 30px;
+}
+#github a, #github a:link, #github a:visited, #github a:active {
+    color: #777;
+    text-decoration: none;
+}
+#github a:hover {
+    text-decoration: underline;
+}

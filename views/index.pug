@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', type='text/css', href='css/index.css')
+    title sugarbuild
+  body
+    #files
+        #available Available SQL Exports
+        if !files.length
+            div#no-files No exports found...
+        else
+            table#exports
+                thead
+                    tr
+                        td Export
+                        td Size
+                        td Created
+                tbody
+                    each file in files
+                        tr
+                            td.file
+                                a(href='/data/' + file.name)= file.name
+                            td.size= file.filesize
+                            td.created= file.modified
+        div#github
+            a(href='https://github.com/ScopeXL/sugarbuild' target='_blank') GitHub

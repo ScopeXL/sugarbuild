@@ -1,0 +1,25 @@
+{
+  "name": "sugarbuild",
+  "version": "0.0.1",
+  "description": "A nodejs application that automates the build process of SugarCRM. This project is targeted for developers who rely on building instances of SugarCRM regularly. With options to install demo data through the PHP install script or through SQL dumps that it can generate (or use another location for SQL dumps). It is built to be modular, allowing you to control the entire installation process on what you want to do.",
+  "author": "Ed Roesch <eroesch@sugarcrm.com> (http://www.edroesch.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ScopeXL/sugarbuild.git"
+  },
+  "bin": {
+    "sugarbuild": "./sugarbuild.js"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "express": "^4.13.4",
+    "fs.extra": "^1.3.2",
+    "gulp": "^3.9.1",
+    "moment": "^2.13.0",
+    "phantomjs-prebuilt": "^2.1.7",
+    "pug": "^2.0.0-alpha6",
+    "q": "^1.4.1",
+    "underscore": "^1.8.3"
+  }
+}
