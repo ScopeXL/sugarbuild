@@ -59,7 +59,9 @@ All parameters are **optional**. You may also set them in the `config.json` file
 | --installSugar | true | Run the PHP installation of SugarCRM in the background |
 | --installDemoData | false | Install demo data from the PHP installation process. This can be very time consuming |
 | --importDemoData | true | Import demo data from a SQL dump. This will only run if `installDemoData` is set to false | 
-| --importDumpFile | master OR http://localhost:3000/data/master | If `importDemoData` is true, you **must** specify the location of the SQL dump using a filename in your `sqlDumpDir` or a URL to the file. Exclude **.sql** from either option you choose |
+| --importDumpFile | master | If `importDemoData` is true, you **must** specify the location of the SQL dump using a filename in your `sqlDumpDir` |
+| --importHost | http://example.com/build | Allows you to import a branches demo data from another host if they are running this tool. You also need to specify the branch to import in the `importBranch` setting |
+| --importBranch | master | Fetches the latest SQL export of this branch from the `importHost`. This is the fastest way to install demo data |
 | --watchChanges | true | Similar to build-monitor. Once built it will continue listening for file changes in `sourceDir` and copy them to `outputDir` as they happen |
 | --includeLanguage | false | Build with language string |
 | --developerMode | true | Sets the developer mode during installation |
