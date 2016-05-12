@@ -39,9 +39,7 @@ if (build.getConfig('enableBuildSchedule')) {
     }
 } else {
     // single build instance
-    build.full(function() {
-
-    });
+    build.full();
 }
 
 // Start the web server
@@ -51,6 +49,10 @@ function initWebServer() {
     app.set('views', './views');
 
     app.get('/', function(req, res) {
+        res.redirect('/build');
+    });
+
+    app.get('/build', function(req, res) {
         Q.when(build.fileList(build.getConfig('sqlDumpDir'))).then(function(files) {
             res.render('index', {
                 files: files
@@ -60,7 +62,7 @@ function initWebServer() {
         });
     });
 
-    app.get('/data/:branch', function(req, res) {
+    app.get('/build/data/:branch', function(req, res) {
         var branch = req.params.branch,
             dataFileLocation = path.join(build.getConfig('sqlDumpDir'), branch + '.sql');
 
@@ -85,7 +87,7 @@ function initWebServer() {
         });
     });
 
-    app.get('/css/index.css', function(req, res) {
+    app.get('/build/css/index.css', function(req, res) {
         res.sendFile(path.join(__dirname, 'css', 'index.css'));
     });
 
@@ -98,13 +100,17 @@ function initBuildSchedule() {
 
     scheduledRun = setInterval(function() {
         if (!isBuilding) {
-            // restart the build process
-            currentBranchIndex = 0;
-            buildInstance();
-        }
+            var currentTimestamp = new moment();
 
-        nextSchedule = new moment().add(interval, 'milliseconds');
-    }, interval);
+            if (nextSchedule.unix() <= currentTimestamp.unix()) {
+                // restart the build process
+                currentBranchIndex = 0;
+                buildInstance();
+
+                nextSchedule = new moment().add(interval, 'milliseconds');
+            }
+        }
+    }, 30000);
 }
 
 function buildInstance() {
@@ -114,19 +120,29 @@ function buildInstance() {
         build.log('Branch switched to', 'green', branches[currentBranchIndex], 'magenta');
         // set the sql dump file name to the branch name
         build.setConfig('importDumpFile', branches[currentBranchIndex]);
+        // force set the flavor to ent
+        build.setConfig('flavor', 'ent');
+        build.log('Flavor set to', 'cyan', 'ent', 'magenta');
         build.full(function() {
             // current build is complete
-            // increase build index
-            currentBranchIndex++;
+            // force set the flavor to pro
+            build.setConfig('flavor', 'pro');
+            build.log('Flavor set to', 'cyan', 'pro', 'magenta');
+            build.full(function() {
+                // increase build index
+                currentBranchIndex++;
 
-            if (!_.isUndefined(branches[currentBranchIndex])) {
-                build.log('Next build will begin in 10 seconds...', 'gray');
-                setTimeout(buildInstance, 10000);
-            } else {
-                // all builds finished
-                isBuilding = false;
-                build.log('Next run is scheduled for', 'cyan', nextSchedule.format('MMMM Do, HH:mm:ss'), 'magenta');
-            }
+                if (!_.isUndefined(branches[currentBranchIndex])) {
+                    build.log('Next build will begin in 10 seconds...', 'gray');
+                    setTimeout(buildInstance, 10000);
+                } else {
+                    // all builds finished
+                    isBuilding = false;
+                    build.log('Next run is scheduled for', 'cyan', nextSchedule.format('MMMM Do, HH:mm:ss'), 'magenta');
+                }
+            });
+
+
         });
     });
 }
