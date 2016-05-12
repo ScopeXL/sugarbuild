@@ -13,7 +13,7 @@
     "installDemoData": false,
     "importDemoData": true,
     "importDumpFile": "",
-    "importHost": "https://sugar.roesch.io",
+    "importHost": "https://sugar.roesch.io/build",
     "importBranch": "master",
     "watchChanges": true,
     "includeLanguage": false,
