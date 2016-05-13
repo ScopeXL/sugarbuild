@@ -7,7 +7,7 @@ modular, allowing you to control the entire installation process on what you wan
 
 ## Code Example
 ```
-sugarbuild --runComposer=true --buildSugar=true --buildSidecar=true --installSugar=true --installDemoData=false
+sugarbuild --flavor=ent --importDemoData=true --importBranch=master
 ```
 Check out the [Parameters](https://github.com/ScopeXL/sugarbuild#parameters) section for a list of all the configurable options. All parameters can be set from the command line and/or the `config.json` file.
 
