@@ -30,10 +30,12 @@ npm install
 npm link
 ```
 Rename `config.sample.json` to `config.json`
-Edit the `config.json` file to fit your installation needs. Don't forget to insert your SugarCRM license key:
+Edit the `config.json` file to fit your installation needs. Don't forget to insert your SugarCRM license key as well as your source/output directories:
 ```
 {
   "sugarcrmLicense": "{YOUR_LICENSE_KEY}",
+  "sourceDir": "/Users/me/Repos/sugar",
+  "outputDir": "/Users/me/Sites"
 }
 ```
 Run the application with:
