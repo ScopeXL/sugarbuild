@@ -13,11 +13,11 @@ var Q = require('q'),
     scheduledRun = null,
     currentBranchIndex = 0;
 
-build.log('Starting build...', 'cyan');
 // check for command line arguments and overwrite config accordingly
 build.checkCommandLineArgs();
-// list configuration before build initialize
-build.listConfig();
+
+// Do a version check
+build.versionCheck();
 
 if (build.getConfig('enableWebServer')) {
     // start the web server
@@ -25,6 +25,8 @@ if (build.getConfig('enableWebServer')) {
 }
 
 if (build.getConfig('enableBuildSchedule')) {
+    // list configuration before build initialize
+    build.listConfig();
     // run as a service building multiple branches
     branches = build.getConfig('branches');
 
@@ -37,7 +39,18 @@ if (build.getConfig('enableBuildSchedule')) {
         // start the build process for the branches
         initBuildSchedule(branches);
     }
+} else if (build.getConfig('watchOnly')) {
+    // watch for changes without building
+    build.watchChanges();
+
+    if (build.getConfig('enableWebServer')) {
+        build.log('Web Server Listening on:', 'gray',
+            'http://localhost:' + build.getConfig('webServerPort'), 'magenta'
+        );
+    }
 } else {
+    // list configuration before build initialize
+    build.listConfig();
     // single build instance
     build.full();
 }
@@ -46,7 +59,7 @@ if (build.getConfig('enableBuildSchedule')) {
 function initWebServer() {
     var app = express();
     app.set('view engine', 'pug');
-    app.set('views', './views');
+    app.set('views', path.join(__dirname, 'views'));
 
     app.get('/', function(req, res) {
         res.redirect('/build');

@@ -16,6 +16,7 @@
     "importHost": "https://sugar.roesch.io/build",
     "importBranch": "master",
     "watchChanges": true,
+    "watchOnly": false,
     "includeLanguage": false,
     "developerMode": true,
     "createSqlDump": false,

@@ -41,6 +41,15 @@ a, a:link, a:visited, a:active {
 #exports td {
     padding: 5px;
 }
+#exports td.file {
+    width: 40%;
+}
+#exports td.size {
+    width: 20%;
+}
+#exports td.created {
+    width: 40%;
+}
 
 #github {
     text-align: right;
