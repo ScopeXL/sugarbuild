@@ -38,17 +38,23 @@ a, a:link, a:visited, a:active {
 #exports {
     width: 100%;
 }
+#exports thead td {
+    font-weight: bold;
+}
 #exports td {
     padding: 5px;
 }
 #exports td.file {
-    width: 40%;
+    width: 30%;
+}
+#exports td.flavor {
+    width: 20%;
 }
 #exports td.size {
     width: 20%;
 }
 #exports td.created {
-    width: 40%;
+    width: 30%;
 }
 
 #github {

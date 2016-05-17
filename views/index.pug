@@ -13,13 +13,15 @@ html
                 thead
                     tr
                         td.file Export
+                        td.flavor Flavor
                         td.size Size
                         td.created Created
                 tbody
                     each file in files
                         tr
                             td.file
-                                a(href='/build/data/' + file.name)= file.name
+                                a(href='/build/data/' + file.filename)= file.name
+                            td.flavor= file.flavor
                             td.size= file.filesize
                             td.created= file.modified
         div#github
