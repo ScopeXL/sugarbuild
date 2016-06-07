@@ -133,6 +133,8 @@ function buildInstance() {
         build.log('Branch switched to', 'green', branches[currentBranchIndex], 'magenta');
         // set the sql dump file name to the branch name
         build.setConfig('importDumpFile', branches[currentBranchIndex]);
+        // set the current branch
+        build.setConfig('currentBranch', branches[currentBranchIndex]);
         // force set the flavor to ent
         build.setConfig('flavor', 'ent');
         build.log('Flavor set to', 'cyan', 'ent', 'magenta');

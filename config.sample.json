@@ -27,10 +27,9 @@
     "branches": [
         "master",
         "new_email",
-        "7_8",
-        "7_7",
-        "7_7_1"
+        "7_8"
     ],
+    "currentBranch": "",
     "sugar_config_si": {
         "developerMode": "{{auto_convert}}",
         "setup_db_host_name": "localhost",
