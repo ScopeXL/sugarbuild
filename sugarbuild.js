@@ -24,35 +24,56 @@ if (build.getConfig('enableWebServer')) {
     initWebServer();
 }
 
-if (build.getConfig('enableBuildSchedule')) {
-    // list configuration before build initialize
-    build.listConfig();
-    // run as a service building multiple branches
-    branches = build.getConfig('branches');
-
-    if (_.isArray(branches)) {
-        // ignore watch for changes setting as this is used for single builds
-        if (build.getConfig('watchChanges')) {
-            build.setConfig('watchChanges', false);
-            build.log('No longer watching for changes, use only for single builds', 'yellow');
-        }
-        // start the build process for the branches
-        initBuildSchedule(branches);
-    }
-} else if (build.getConfig('watchOnly')) {
-    // watch for changes without building
+if (build.getConfig('watchChanges')) {
     build.watchChanges();
+    // we are watching the sugarcrm directory for file changes
+    build.log('Listening for changes to the sugarcrm directory...', 'gray');
+}
 
-    if (build.getConfig('enableWebServer')) {
-        build.log('Web Server Listening on:', 'gray',
-            'http://localhost:' + build.getConfig('webServerPort'), 'magenta'
-        );
+// Start Mailcatcher
+// if (build.getConfig('mailcatcher')) {
+//     build.mailcatcher({
+//         logOutput: true
+//     });
+//     build.log('Enabling Mailcatcher...', 'gray');
+// }
+
+// do not build from command line when build admin is loaded. Use Web GUI instead
+if (!build.getConfig('buildAdmin')) {
+    if (build.getConfig('enableBuildSchedule')) {
+        // list configuration before build initialize
+        build.listConfig();
+        // run as a service building multiple branches
+        branches = build.getConfig('branches');
+
+        if (_.isArray(branches)) {
+            // ignore watch for changes setting as this is used for single builds
+            if (build.getConfig('watchChanges')) {
+                build.setConfig('watchChanges', false);
+                build.log('No longer watching for changes, use only for single builds', 'yellow');
+            }
+            // start the build process for the branches
+            initBuildSchedule(branches);
+        }
+    } else if (build.getConfig('watchOnly')) {
+        // watch for changes without building
+        //build.watchChanges();
+
+        if (build.getConfig('enableWebServer')) {
+            build.log('Web Server Listening on:', 'gray',
+                'http://localhost:' + build.getConfig('webServerPort'), 'magenta'
+            );
+        }
+    } else {
+        // list configuration before build initialize
+        build.listConfig();
+        // single build instance
+        build.full();
     }
 } else {
-    // list configuration before build initialize
-    build.listConfig();
-    // single build instance
-    build.full();
+    build.log('Use Web Admin Interface:', 'gray',
+        'http://localhost:' + build.getConfig('webServerPort'), 'magenta'
+    );
 }
 
 // Start the web server
@@ -60,9 +81,20 @@ function initWebServer() {
     var app = express();
     app.set('view engine', 'pug');
     app.set('views', path.join(__dirname, 'views'));
+    //app.use(express.static(path.dirname(require.main.filename)));
 
     app.get('/', function(req, res) {
         res.redirect('/build');
+        /*res.render('build', {
+            config: build.fullConfig()
+        });*/
+        /*res.sendFile(
+            path.join(
+                path.dirname(require.main.filename),
+                'views',
+                'build.html'
+            )
+        );*/
     });
 
     app.get('/build', function(req, res) {
